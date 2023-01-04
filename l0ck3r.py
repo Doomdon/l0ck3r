@@ -5,7 +5,7 @@ from time import sleep
 import pythoncom, pyHook
 
 
-# Создаем окно
+# Создаем  окно
 root = Tk()
 
 # Вырубаем защиту левого верхнего угла экрана
